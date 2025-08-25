@@ -1,0 +1,342 @@
+import os
+import re
+import shutil
+import fitz  # PyMuPDF
+from docx import Document
+
+# Regex pattern to extract plan name
+PLAN_NAME_REGEX = r"You’re enrolled as a member of (.+?)\."
+
+def normalize_text(text):
+    """Normalize whitespace and line breaks"""
+    return ' '.join(text.split())
+
+def extract_plan_name(pdf_path):
+    """Extract plan name from PDF using the defined regex"""
+    doc = fitz.open(pdf_path)
+    full_text = ""
+    for page in doc:
+        full_text += page.get_text()
+    doc.close()
+    full_text = normalize_text(full_text)
+    match = re.search(PLAN_NAME_REGEX, full_text)
+    if match:
+        return match.group(1)
+    else:
+        return None
+
+def find_template_files(template_folder, plan_name):
+    """Return paths for template PDF and DOCX based on plan name"""
+    pdf_path = os.path.join(template_folder, f"{plan_name}.pdf")
+    docx_path = os.path.join(template_folder, f"{plan_name}.docx")
+    if os.path.exists(pdf_path) and os.path.exists(docx_path):
+        return pdf_path, docx_path
+    else:
+        return None, None
+
+def compare_pdfs(template_pdf, input_pdf):
+    """
+    Compare text of template PDF and input PDF.
+    Returns a list of differences with line numbers and missing paragraphs.
+    """
+    t_doc = fitz.open(template_pdf)
+    i_doc = fitz.open(input_pdf)
+
+    template_text = normalize_text(" ".join([page.get_text() for page in t_doc]))
+    input_text = normalize_text(" ".join([page.get_text() for page in i_doc]))
+
+    t_doc.close()
+    i_doc.close()
+
+    template_lines = template_text.split('. ')
+    input_lines = input_text.split('. ')
+
+    differences = []
+    missing = []
+
+    for idx, t_line in enumerate(template_lines):
+        i_line = input_lines[idx] if idx < len(input_lines) else ""
+        if t_line.strip() != i_line.strip():
+            differences.append((idx + 1, t_line.strip(), i_line.strip()))  # add line number
+
+    # Any extra lines in template
+    if len(template_lines) > len(input_lines):
+        for idx in range(len(input_lines), len(template_lines)):
+            missing.append((idx + 1, template_lines[idx].strip()))
+
+    return differences, missing
+
+def update_docx(template_docx, output_docx, differences):
+    """
+    Apply differences to copied DOCX.
+    differences: list of tuples (line_number, template_text, input_text)
+    """
+    doc = Document(template_docx)
+    for _, t_line, i_line in differences:  # unpack line number, but ignore _
+        for p in doc.paragraphs:
+            if t_line in p.text:
+                p.text = p.text.replace(t_line, i_line)
+    doc.save(output_docx)
+
+def log_differences(differences, log_file, input_pdf_name):
+    """Log detected differences between template and input PDF with line numbers"""
+    if differences:
+        with open(log_file, "a", encoding="utf-8") as f:
+            f.write(f"=== Differences for {input_pdf_name} ===\n")
+            for line_num, t_line, i_line in differences:
+                f.write(f"Line {line_num}:\n")
+                f.write(f"  TEMPLATE: {t_line}\n")
+                f.write(f"  INPUT   : {i_line}\n\n")
+
+def log_missing(missing_paragraphs, log_file):
+    """Log missing paragraphs with line numbers"""
+    if missing_paragraphs:
+        with open(log_file, "a", encoding="utf-8") as f:
+            f.write(f"=== Missing paragraphs ===\n")
+            for line_num, p in missing_paragraphs:
+                f.write(f"Line {line_num}: {p}\n")
+
+def process_folder(template_folder, input_folder):
+    missing_log = os.path.join(input_folder, "missing_sections.log")
+    diff_log = os.path.join(input_folder, "differences.log")
+
+    # Clear previous logs
+    for log_file in [missing_log, diff_log]:
+        if os.path.exists(log_file):
+            os.remove(log_file)
+
+    for file_name in os.listdir(input_folder):
+        if file_name.lower().endswith(".pdf"):
+            input_pdf_path = os.path.join(input_folder, file_name)
+            plan_name = extract_plan_name(input_pdf_path)
+            if not plan_name:
+                print(f"Could not extract plan name from {file_name}")
+                continue
+
+            template_pdf, template_docx = find_template_files(template_folder, plan_name)
+            if not template_pdf or not template_docx:
+                print(f"No template found for plan '{plan_name}'")
+                continue
+
+            # Copy template DOCX to input folder and rename
+            output_docx_name = os.path.splitext(file_name)[0] + ".docx"
+            output_docx_path = os.path.join(input_folder, output_docx_name)
+            shutil.copy(template_docx, output_docx_path)
+
+            # Compare PDFs
+            differences, missing = compare_pdfs(template_pdf, input_pdf_path)
+
+            # Log differences
+            log_differences(differences, diff_log, file_name)
+
+            # Update DOCX
+            update_docx(output_docx_path, output_docx_path, differences)
+
+            # Log missing paragraphs
+            log_missing(missing, missing_log)
+
+            print(f"Processed {file_name} -> {output_docx_name}")
+
+if __name__ == "__main__":
+    template_folder = input("Enter template folder path: ")
+    input_folder = input("Enter input PDF folder path: ")
+    process_folder(template_folder, input_folder)
+
+
+
+
+
+
+
+###################################################
+
+
+
+import os
+import re
+import shutil
+import fitz  # PyMuPDF
+from docx import Document
+
+# Regex pattern to extract plan name
+PLAN_NAME_REGEX = r"You’re enrolled as a member of (.+?)\."
+
+def normalize_text(text):
+    """Normalize whitespace and line breaks"""
+    return ' '.join(text.split())
+
+def extract_plan_name(pdf_path):
+    """Extract plan name from PDF using the defined regex"""
+    doc = fitz.open(pdf_path)
+    full_text = ""
+    for page in doc:
+        full_text += page.get_text()
+    doc.close()
+    full_text = normalize_text(full_text)
+    match = re.search(PLAN_NAME_REGEX, full_text)
+    if match:
+        return match.group(1)
+    else:
+        return None
+
+def find_template_files(template_folder, plan_name):
+    """Return paths for template PDF and DOCX based on plan name"""
+    pdf_path = os.path.join(template_folder, f"{plan_name}.pdf")
+    docx_path = os.path.join(template_folder, f"{plan_name}.docx")
+    if os.path.exists(pdf_path) and os.path.exists(docx_path):
+        return pdf_path, docx_path
+    else:
+        return None, None
+
+def compare_pdfs(template_pdf, input_pdf):
+    """
+    Compare text of template PDF and input PDF.
+    Returns a list of differences (for simplicity, here we just list lines that differ)
+    and missing paragraphs.
+    """
+    t_doc = fitz.open(template_pdf)
+    i_doc = fitz.open(input_pdf)
+
+    template_text = normalize_text(" ".join([page.get_text() for page in t_doc]))
+    input_text = normalize_text(" ".join([page.get_text() for page in i_doc]))
+
+    t_doc.close()
+    i_doc.close()
+
+    # Simple difference detection by line
+    template_lines = template_text.split('. ')
+    input_lines = input_text.split('. ')
+
+    differences = []
+    missing = []
+
+    for t_line, i_line in zip(template_lines, input_lines):
+        if t_line.strip() != i_line.strip():
+            differences.append((t_line.strip(), i_line.strip()))
+
+    # Any extra lines in template
+    if len(template_lines) > len(input_lines):
+        missing.extend(template_lines[len(input_lines):])
+
+    return differences, missing
+
+def update_docx(template_docx, output_docx, differences):
+    """
+    Apply differences to copied DOCX.
+    Here we do a simple search & replace in paragraphs for changed lines.
+    """
+    doc = Document(template_docx)
+    for t_line, i_line in differences:
+        for p in doc.paragraphs:
+            if t_line in p.text:
+                p.text = p.text.replace(t_line, i_line)
+    doc.save(output_docx)
+    doc.close()
+
+def log_missing(missing_paragraphs, log_file):
+    if missing_paragraphs:
+        with open(log_file, "a", encoding="utf-8") as f:
+            for p in missing_paragraphs:
+                f.write(p + "\n")
+
+def process_folder(template_folder, input_folder):
+    log_file = os.path.join(input_folder, "missing_sections.log")
+    if os.path.exists(log_file):
+        os.remove(log_file)  # clear previous log
+
+    for file_name in os.listdir(input_folder):
+        if file_name.lower().endswith(".pdf"):
+            input_pdf_path = os.path.join(input_folder, file_name)
+            plan_name = extract_plan_name(input_pdf_path)
+            if not plan_name:
+                print(f"Could not extract plan name from {file_name}")
+                continue
+
+            template_pdf, template_docx = find_template_files(template_folder, plan_name)
+            if not template_pdf or not template_docx:
+                print(f"No template found for plan '{plan_name}'")
+                continue
+
+            # Copy template DOCX to input folder and rename
+            output_docx_name = os.path.splitext(file_name)[0] + ".docx"
+            output_docx_path = os.path.join(input_folder, output_docx_name)
+            shutil.copy(template_docx, output_docx_path)
+
+            # Compare PDFs and get differences
+            differences, missing = compare_pdfs(template_pdf, input_pdf_path)
+
+            # Update DOCX
+            update_docx(output_docx_path, output_docx_path, differences)
+
+            # Log missing paragraphs
+            log_missing(missing, log_file)
+
+            print(f"Processed {file_name} -> {output_docx_name}")
+
+if __name__ == "__main__":
+    template_folder = input("Enter template folder path: ")
+    input_folder = input("Enter input PDF folder path: ")
+    process_folder(template_folder, input_folder)
+
+
+
+############################################
+
+
+
+Act as a prompt engineer.
+Review the following pompt for me.
+Optimize it to make it better.
+Ask me any question you have before proceeding.
+
+Prompt: <Your Prompt>
+
+
+
+
+########################################
+
+
+You are an elite prompt engineer tasked with designing the most effective, efficient, and contextually aware prompts for large language models (LLMs).
+For any task you receive, you will:
+
+1. Extract Core Intent — Identify exactly what the user is trying to achieve and reframe it into a concise, high-impact instruction.
+
+
+2. Optimize Input Structure — Format the request to improve the LLM’s reasoning, creativity, and clarity of output.
+
+
+3. Anticipate Ambiguities — Preempt confusion by adding necessary clarifications and handling edge cases.
+
+
+4. Apply Domain Knowledge — Use domain-specific terminology and concepts when appropriate.
+
+
+5. Embed Constraints — Include tone, length, style, and structural requirements.
+
+
+6. Provide Examples — Add few-shot demonstrations if they will improve the response quality.
+
+
+7. Test and Iterate — Predict how the LLM will respond, refine the prompt if it’s not optimal.
+
+
+
+Prompt Design Protocol:
+
+Step 1: Define Objective — Clearly state the desired outcome or deliverable.
+
+Step 2: Contextualize — Tailor wording to the domain (e.g., legal contract, game dialogue, SEO article).
+
+Step 3: Select Format — Decide whether output should be narrative, bullet list, table, JSON, markdown, or code.
+
+Step 4: Add Constraints — Word count, tone, persona, style, headings, etc.
+
+Step 5: Include Examples — Give one or more model answers to guide style.
+
+Step 6: Predict Output — Mentally run a dry-test and refine wording for precision.
+
+
+Golden Rule:
+Always ask yourself — Will this prompt deliver the highest-quality result for a non-expert?
+If the answer is no, rewrite until it does.
