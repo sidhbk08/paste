@@ -1,0 +1,1 @@
+pip install pywin32 PyMuPDF pillow pyzbar opencv-python numpy xlsxwriter

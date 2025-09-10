@@ -1,0 +1,1783 @@
+Sub Macro1()
+'
+' Macro1 Macro
+'
+'
+    Selection.Cells.Merge
+End Sub
+Sub Macro2()
+'
+' Macro2 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Run MacroName:="Normal.NewMacros.Macro1"
+    Selection.ParagraphFormat.Alignment = wdAlignParagraphCenter
+End Sub
+
+Sub header()
+'
+'
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    ActiveWindow.View.ShowFieldCodes = True
+    With Selection.Find
+        .Text = "MERGEFORMAT[0-9]{1,}"
+        .Replacement.Text = "MERGEFORMAT"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = True
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+End Sub
+
+
+
+Sub Merge1()
+'
+' Macro1 Macro
+'
+'
+    Selection.SelectCell
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.SelectRow
+    Selection.Cells.Merge
+    Selection.ParagraphFormat.Alignment = wdAlignParagraphCenter
+End Sub
+
+Sub UHC()
+    Dim doc As Document
+    Dim keywordAdvantage As String
+    Dim keywordMedicare As String
+    Dim imagePathAdvantage As String
+    Dim imagePathMedicare As String
+
+    Set doc = ActiveDocument
+
+    keywordAdvantage = "See claim details on following pages or go directly to MyUHCAdvantage.com to view."
+    keywordMedicare = "See claim details on following pages or go directly to MyUHCMedicare.com to view."
+
+    imagePathAdvantage = "C:\Users\SiddharthSrivastava\Downloads\Images\UHCAdvantage.png"
+    imagePathMedicare = "C:\Users\SiddharthSrivastava\Downloads\Images\UHCMedicare.png"
+
+    With doc.Content.Find
+        .ClearFormatting
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+
+        .Text = keywordAdvantage
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCAdvantage.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+
+        .Text = keywordMedicare
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCMedicare.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+    End With
+End Sub
+
+Sub AUHC()
+    Dim doc As Document
+    Dim keywordAdvantage As String
+    Dim keywordMedicare As String
+    Dim keywordPCP As String
+    Dim keywordPCN As String
+
+    Set doc = ActiveDocument
+
+    keywordAdvantage = "See claim details on following pages or go directly to MyUHCAdvantage.com to view."
+    keywordMedicare = "See claim details on following pages or go directly to MyUHCMedicare.com to view."
+    keywordPCP = "See claim details on following pages or go directly to myPreferredCare.com to view"
+    keywordPCN = "See claim details on following pages or go directly to PCNhealth.com to view."
+
+    With doc.Content.Find
+        .ClearFormatting
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+
+        .Text = keywordAdvantage
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCAdvantage.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+
+        .Text = keywordMedicare
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCMedicare.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+        
+        .Text = keywordPCP
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\Preffered.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+
+        .Text = keywordPCN
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\PrefferedNet.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+    End With
+End Sub
+
+Sub SUHC()
+    Dim doc As Document
+    Dim keywordAdvantage As String
+    Dim keywordMedicare As String
+    Dim imagePathAdvantage As String
+    Dim imagePathMedicare As String
+
+    Set doc = ActiveDocument
+
+    keywordAdvantage = "Consulte la información detallada de los reclamos en las páginas siguientes o visite directamente MyUHCAdvantage.com para verlos."
+    keywordMedicare = "Consulte la información detallada de los reclamos en las páginas siguientes o visite directamente MyUHCMedicare.com para verlos."
+
+    imagePathAdvantage = "C:\Users\SiddharthSrivastava\Downloads\Images\UHCAdvantage.png"
+    imagePathMedicare = "C:\Users\SiddharthSrivastava\Downloads\Images\UHCMedicare.png"
+
+    With doc.Content.Find
+        .ClearFormatting
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+
+        .Text = keywordAdvantage
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCAdvantage.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+
+        .Text = keywordMedicare
+        If .Execute Then
+            Selection.HomeKey Unit:=wdLine
+            Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCMedicare.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+    End With
+End Sub
+
+Sub SPUHC()
+    Dim doc As Document
+    Dim keywordAdvantage As String
+    Dim keywordMedicare As String
+    Dim keywordPCP As String
+    Dim keywordPCN As String
+
+    Set doc = ActiveDocument
+
+    keywordAdvantage = "Consulte la información detallada de los reclamos en las páginas siguientes o visite directamente MyUHCAdvantage.com para verlos."
+    keywordMedicare = "Consulte la información detallada de los reclamos en las páginas siguientes o visite directamente MyUHCMedicare.com para verlos."
+    keywordPCP = "Consulte la información detallada de los reclamos en las páginas siguientes o visite directamente myPreferredCare.com para verlos."
+    keywordPCN = "Consulte la información detallada de los reclamos en las páginas siguientes o visite directamente PCNhealth.com para verlos."
+
+    With doc.Content.Find
+        .ClearFormatting
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+
+        .Text = keywordAdvantage
+        If .Execute Then
+            Selection.MoveRight Unit:=wdCell
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCAdvantage.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+
+        .Text = keywordMedicare
+        If .Execute Then
+            Selection.MoveRight Unit:=wdCell
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\UHCMedicare.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+        
+        .Text = keywordPCP
+        If .Execute Then
+            Selection.MoveRight Unit:=wdCell
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\Preffered.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+
+        .Text = keywordPCN
+        If .Execute Then
+            Selection.MoveRight Unit:=wdCell
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\SiddharthSrivastava\Downloads\Images\PrefferedNet.png" _
+                , LinkToFile:=False, SaveWithDocument:=True
+            Exit Sub
+        End If
+    End With
+End Sub
+
+Sub UHCMed()
+'
+' Macro4 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.InlineShapes.AddPicture fileName:= _
+        "C:\Users\SiddharthSrivastava\Downloads\Images\UHCMedicare.png" _
+        , LinkToFile:=False, SaveWithDocument:=True
+End Sub
+Sub UHCAdv()
+'
+' Macro5 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.InlineShapes.AddPicture fileName:= _
+        "C:\Users\SiddharthSrivastava\Downloads\Images\UHCAdvantage.png" _
+        , LinkToFile:=False, SaveWithDocument:=True
+End Sub
+Sub PeopleQR()
+'
+' Macro5 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.InlineShapes.AddPicture fileName:= _
+        "C:\Users\SiddharthSrivastava\Downloads\Images\People.png" _
+        , LinkToFile:=False, SaveWithDocument:=True
+End Sub
+
+Sub Prefferd()
+'
+' Macro5 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.InlineShapes.AddPicture fileName:= _
+        "C:\Users\SiddharthSrivastava\Downloads\Images\Preffered.png" _
+        , LinkToFile:=False, SaveWithDocument:=True
+End Sub
+
+Sub Net()
+'
+' Macro5 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.InlineShapes.AddPicture fileName:= _
+        "C:\Users\SiddharthSrivastava\Downloads\Images\PrefferedNet.png" _
+        , LinkToFile:=False, SaveWithDocument:=True
+End Sub
+
+Sub SPA_Partner()
+'
+' SPA_Preffe Macro
+'
+'
+    Selection.MoveRight Unit:=wdCell
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.InlineShapes.AddPicture fileName:= _
+        "C:\Users\SiddharthSrivastava\Downloads\Images\Preffered.png", LinkToFile _
+        :=False, SaveWithDocument:=True
+End Sub
+
+Sub gru()
+'
+' Gru Macro
+'
+'
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "groupo"
+        .Replacement.Text = "grupo"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchByte = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+End Sub
+
+Sub Loc()
+    Dim doc As Document
+    Dim keywordAdvantage As String
+    Dim keywordMedicare As String
+
+    Set doc = ActiveDocument
+
+    keywordAdvantage = "MyUHCAdvantage.com"
+    keywordMedicare = "MyUHCMedicare.com"
+
+    With doc.Content.Find
+        .ClearFormatting
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+
+        .Text = keywordAdvantage
+        If .Execute Then
+            Selection.MoveDown Unit:=wdLine, Count:=3, Extend:=wdExtend
+            Selection.MoveRight Unit:=wdCharacter, Count:=13, Extend:=wdExtend
+            Application.Templates( _
+                 "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+                  ).BuildingBlockEntries("LocText").Insert Where:=Selection.Range, RichText _
+                  :=True
+            Exit Sub
+        End If
+
+        .Text = keywordMedicare
+        If .Execute Then
+            Selection.MoveDown Unit:=wdLine, Count:=3, Extend:=wdExtend
+            Selection.MoveRight Unit:=wdCharacter, Count:=13, Extend:=wdExtend
+            Application.Templates( _
+                "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+                  ).BuildingBlockEntries("LocText").Insert Where:=Selection.Range, RichText _
+                   :=True
+            Exit Sub
+        End If
+    End With
+End Sub
+
+Sub SPA_Par()
+'
+' SPAPARA Macro
+'
+'
+    Selection.TypeParagraph
+    Selection.MoveRight Unit:=wdCharacter, Count:=1
+    Selection.TypeBackspace
+    Selection.MoveDown Unit:=wdLine, Count:=1
+    Selection.TypeBackspace
+    Selection.TypeText Text:=" "
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.Font.Bold = wdToggle
+End Sub
+
+Sub United81()
+'
+' Macro7 Macro
+'
+'
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("United1081").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+Sub IR()
+'
+' Macro8 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("UnitedIR").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub United13()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("United7113").Insert Where:=Selection.Range, _
+        RichText:=True
+End Sub
+
+
+Sub United703()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("United7103").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub United56()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("United0356").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub United23()
+'
+' Macro12 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("United03").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub Network()
+'
+' Macro12 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("PCN").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub Pref()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("PrefferedUnited").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub PrefferedIR()
+'
+' Macro8 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=6, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("PrefIR").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub NetworkIR()
+'
+' Macro8 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=6, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("NetIR").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub People()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("PeopleH").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+
+Sub four()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("FourAd").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+Sub IDNUHC()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("IDNUnited").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+Sub IDNPep()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=2, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("IDNPeople").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPA_Preff()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPA_Pref").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPA_Net()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPA_PCN").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPAUN13()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPA13").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPASmall()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SUHCSmall").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPANes()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SNoES").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPAWes()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SWithES").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPA0356()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPA0356").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPAIR()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPAIR").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPAPeople()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPAPEOPLE").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPWithoutNOS()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPNONOS").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPAfour()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPAFour").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPAfourN()
+'
+' Macro13 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("SPAFour1086").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub SPAIDN()
+'
+' Macro11 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("IDNSPA").Insert Where:= _
+        Selection.Range, RichText:=True
+End Sub
+
+Sub DeENG()
+'
+' De Macro
+'
+'
+    Selection.MoveDown Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdLine, Count:=92, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdLine, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("ENGDEN").Insert Where:=Selection.Range, RichText _
+        :=True
+End Sub
+
+Sub field()
+    Dim fld As field
+    For Each fld In ActiveDocument.Fields
+        fld.Update
+    Next fld
+    ' MsgBox "All field codes have been updated."
+End Sub
+
+Sub Merge()
+'
+' Mer Macro
+'
+'
+    Selection.MoveRight Unit:=wdCell
+    Selection.SelectCell
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.SelectRow
+    Selection.Cells.Merge
+    Selection.ParagraphFormat.Alignment = wdAlignParagraphCenter
+End Sub
+
+Sub keytable()
+    Dim tbl As Table
+    Dim rng As Range
+
+    Set rng = Selection.Range
+    
+    Do While rng.Start > 0
+        ' Check if the current range is in a table
+        If rng.Tables.Count > 0 Then
+            ' If a table is found, delete it
+            rng.Tables(1).Delete
+            Exit Do
+        End If
+        
+        rng.MoveStart wdParagraph, -1
+    Loop
+    
+    With Selection.Find
+        .ClearFormatting
+        .Text = "[insert_keyterms]^p"
+        .Replacement.ClearFormatting
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Execute Replace:=wdReplaceAll
+    End With
+    
+End Sub
+
+Sub keytablebreak()
+    Dim tbl As Table
+    Dim rng As Range
+
+    Set rng = Selection.Range
+    
+    Do While rng.Start > 0
+        ' Check if the current range is in a table
+        If rng.Tables.Count > 0 Then
+            ' If a table is found, delete it
+            rng.Tables(1).Delete
+            Exit Do
+        End If
+        
+        rng.MoveStart wdParagraph, -1
+    Loop
+    
+    With Selection.Find
+        .ClearFormatting
+        .Text = "[insert_keyterms]^p"
+        .Replacement.ClearFormatting
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Execute Replace:=wdReplaceAll
+    End With
+    
+    Selection.InsertBreak Type:=wdSectionBreakNextPage
+
+    
+    
+End Sub
+
+Sub S_Break()
+'
+' Macro1 Macro
+'
+'
+    Selection.InsertBreak Type:=wdSectionBreakNextPage
+End Sub
+
+Sub DenS()
+'
+' Den Macro
+'
+'
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+End Sub
+
+Sub Denial()
+'
+' Denial Macro
+'
+'
+    Selection.MoveUp Unit:=wdLine, Count:=3, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=25, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    With Selection.Find
+        .ClearFormatting
+        .Text = "insert_DenialCodeDescription]^p"
+        .Replacement.ClearFormatting
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Execute Replace:=wdReplaceAll
+    End With
+End Sub
+
+Sub definition()
+    Dim totalPages As Long
+    Dim doc As Document
+    Dim rng As Range
+    Dim currPage As Long
+    Dim nextPage As Long
+    Dim pos As Long
+    Dim found As Boolean
+    
+    Set doc = ActiveDocument
+    
+    Set rng = doc.Content
+    With rng.Find
+        .ClearFormatting
+        .Text = "Definition of key terms"
+        .MatchCase = False
+        .MatchWholeWord = False
+        .Execute
+        found = .found
+    End With
+    
+    If found Then
+        ' MsgBox """Definition of key terms"" already exists. No insertion made.", vbInformation
+        Exit Sub
+    End If
+
+    totalPages = doc.ComputeStatistics(wdStatisticPages)
+
+    
+    Set rng = doc.GoTo(What:=wdGoToPage, Which:=wdGoToAbsolute, Count:=2)
+    currPage = rng.Information(wdActiveEndPageNumber)
+    pos = rng.Start
+
+    
+    Do
+        rng.Start = pos
+        rng.End = pos + 1
+        nextPage = rng.Information(wdActiveEndPageNumber)
+        
+        If nextPage > currPage Then Exit Do
+        
+        pos = pos + 1
+        If pos > doc.Content.End Then Exit Do
+    Loop
+    
+    Set rng = doc.Range(Start:=pos - 1, End:=pos - 1)
+
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("Def").Insert Where:=rng, RichText:=True
+
+End Sub
+
+Sub edit()
+'
+' edit Macro
+'
+'
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "30 days."
+        .Replacement.Text = "60 days."
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchByte = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute Replace:=wdReplaceAll
+End Sub
+
+Sub Page_break()
+    Dim totalPages As Long
+    Dim doc As Document
+    Dim rng As Range
+    Dim currPage As Long
+    Dim nextPage As Long
+    Dim pos As Long
+
+    Set doc = ActiveDocument
+    
+    totalPages = doc.ComputeStatistics(wdStatisticPages)
+    If totalPages < 2 Then
+        MsgBox "The document has less than 2 pages. Cannot insert section break after second page.", vbExclamation
+        Exit Sub
+    End If
+    
+    Set rng = doc.GoTo(What:=wdGoToPage, Which:=wdGoToAbsolute, Count:=2)
+    
+    currPage = rng.Information(wdActiveEndPageNumber)
+    
+    pos = rng.Start
+    
+    Do
+        rng.Start = pos
+        rng.End = pos + 1
+        nextPage = rng.Information(wdActiveEndPageNumber)
+        
+        If nextPage > currPage Then
+            Exit Do
+        End If
+        
+        pos = pos + 1
+        If pos > doc.Content.End Then
+            Exit Do
+        End If
+    Loop
+    
+    Set rng = doc.Range(Start:=pos - 1, End:=pos - 1)
+    
+    rng.InsertBreak Type:=wdSectionBreakNextPage
+
+End Sub
+
+Sub Macro9()
+'
+' Macro9 Macro
+'
+'
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "Plan Share may include a Reduction for Sequestration"
+        .Replacement.Text = _
+            "Plan share may include a reduction for sequestration"
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute
+    With Selection
+        If .Find.Forward = True Then
+            .Collapse Direction:=wdCollapseStart
+        Else
+            .Collapse Direction:=wdCollapseEnd
+        End If
+        .Find.Execute Replace:=wdReplaceOne
+        If .Find.Forward = True Then
+            .Collapse Direction:=wdCollapseEnd
+        Else
+            .Collapse Direction:=wdCollapseStart
+        End If
+        .Find.Execute
+    End With
+End Sub
+Sub Macro10()
+'
+' Macro10 Macro
+'
+'
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    With Selection.ParagraphFormat
+        .LeftIndent = InchesToPoints(0)
+        .RightIndent = InchesToPoints(0)
+        .SpaceBefore = 12
+        .SpaceBeforeAuto = False
+        .SpaceAfter = 0
+        .SpaceAfterAuto = False
+        .LineSpacingRule = wdLineSpaceSingle
+        .Alignment = wdAlignParagraphLeft
+        .WidowControl = False
+        .KeepWithNext = False
+        .KeepTogether = False
+        .PageBreakBefore = False
+        .NoLineNumber = False
+        .Hyphenation = True
+        .FirstLineIndent = InchesToPoints(0)
+        .OutlineLevel = wdOutlineLevelBodyText
+        .CharacterUnitLeftIndent = 0
+        .CharacterUnitRightIndent = 0
+        .CharacterUnitFirstLineIndent = 0
+        .LineUnitBefore = 0
+        .LineUnitAfter = 0
+        .MirrorIndents = False
+        .TextboxTightWrap = wdTightNone
+        .CollapsedByDefault = False
+    End With
+End Sub
+
+Sub Logo()
+    Dim sec As section
+    Dim hdrftr As HeaderFooter
+    Dim shp As Shape
+    Dim I As Integer
+
+    For Each sec In ActiveDocument.Sections
+        For Each hdrftr In sec.Footers
+            For I = hdrftr.Range.InlineShapes.Count To 1 Step -1
+                hdrftr.Range.InlineShapes(I).Delete
+            Next I
+
+            For I = hdrftr.Shapes.Count To 1 Step -1
+                hdrftr.Shapes(I).Delete
+            Next I
+        Next hdrftr
+    Next sec
+    ' MsgBox "? Logos and images removed from footers.", vbInformation
+End Sub
+
+Sub footer()
+    Dim doc As Document
+    Dim sec As section
+    Dim footer As HeaderFooter
+    Dim para As Paragraph
+    Dim I As Long
+    Dim foundClaimDetails As Boolean
+    Dim foundSTDMatch As Boolean
+
+    Set doc = ActiveDocument
+
+    foundClaimDetails = InStr(1, doc.Range.Text, "See claim details", vbTextCompare) > 0
+
+    If Not foundClaimDetails Then
+        For Each sec In doc.Sections
+            For Each footer In sec.Footers
+                For I = footer.Range.Paragraphs.Count To 1 Step -1
+                    Set para = footer.Range.Paragraphs(I)
+                    Dim paraText As String
+                    paraText = Trim(LCase(para.Range.Text))
+                    
+                    If paraText Like "got questions?*" _
+                        Or paraText Like "get in touch with customer service at*" Then
+                        para.Range.Delete
+                    End If
+                Next I
+
+                For Each para In footer.Range.Paragraphs
+                    Dim paraLower As String
+                    paraLower = Trim(LCase(para.Range.Text))
+                    
+                    If paraLower Like "std-eob*" Or paraLower Like "std-idn*" Then
+                        para.Format.SpaceBefore = 12
+                        foundSTDMatch = True
+                    End If
+                Next para
+            Next footer
+        Next sec
+    End If
+End Sub
+
+Sub footerSPA()
+    Dim doc As Document
+    Dim sec As section
+    Dim footer As HeaderFooter
+    Dim para As Paragraph
+    Dim I As Long
+    Dim foundClaimDetails As Boolean
+    Dim foundSTDMatch As Boolean
+
+    Set doc = ActiveDocument
+
+    foundClaimDetails = InStr(1, doc.Range.Text, "Consulte la información detallada", vbTextCompare) > 0
+
+    If Not foundClaimDetails Then
+        For Each sec In doc.Sections
+            For Each footer In sec.Footers
+                For I = footer.Range.Paragraphs.Count To 1 Step -1
+                    Set para = footer.Range.Paragraphs(I)
+                    Dim paraText As String
+                    paraText = Trim(LCase(para.Range.Text))
+                    
+                    If paraText Like "¿tiene preguntas?*" _
+                        Or paraText Like "comuníquese con servicio al cliente al*" Then
+                        para.Range.Delete
+                    End If
+                Next I
+
+                For Each para In footer.Range.Paragraphs
+                    Dim paraLower As String
+                    paraLower = Trim(LCase(para.Range.Text))
+                    
+                    If paraLower Like "std-eob*" Or paraLower Like "std-idn*" Then
+                        para.Format.SpaceBefore = 12
+                        foundSTDMatch = True
+                    End If
+                Next para
+            Next footer
+        Next sec
+
+        Dim rngLos As Range
+        Set rngLos = doc.Content
+        With rngLos.Find
+            .Text = "Los servicios en este"
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .Execute
+        End With
+
+        If rngLos.Find.found Then
+            rngLos.Paragraphs(1).Format.PageBreakBefore = True
+        End If
+
+        Dim rngUse As Range
+        Set rngUse = doc.Content
+        With rngUse.Find
+            .Text = "Use esta Explicación"
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .Execute
+        End With
+
+        If rngUse.Find.found Then
+            rngUse.Select
+            Selection.Collapse Direction:=wdCollapseStart
+            Selection.MoveDown Unit:=wdLine, Count:=1, Extend:=wdExtend
+            Selection.MoveRight Unit:=wdCharacter, Count:=21, Extend:=wdExtend
+            Selection.Delete Unit:=wdCharacter, Count:=1
+        End If
+        
+        Dim rngDec As Range
+        Set rngDec = doc.Content
+        With rngDec.Find
+            .Text = "DECLARACIÓN DE DIVULGACIÓN DE LA LEY DE SIMPLIFICACIÓN DE TRÁMITES ADMINISTRATIVOS (PRA)"
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .Wrap = wdFindContinue
+            .Forward = True
+            .Execute
+        End With
+
+        If rngDec.Find.found Then
+            Dim paraDec As Paragraph
+            Set paraDec = rngDec.Paragraphs(1)
+            paraDec.Range.Collapse Direction:=wdCollapseStart
+            paraDec.Format.KeepWithNext = True
+            paraDec.Format.KeepTogether = True
+            paraDec.Range.Select
+            DoEvents
+        End If
+        
+        Dim rngExp As Range
+        Set rngExp = doc.Content
+        With rngExp.Find
+            .Text = "Explicación de sus notas"
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .Execute
+        End With
+
+        If rngExp.Find.found Then
+            rngExp.Paragraphs(1).Format.KeepWithNext = True
+            rngExp.Paragraphs(1).Format.KeepTogether = True
+        End If
+    End If
+End Sub
+
+
+
+Sub footerIDN()
+    Dim doc As Document
+    Dim sec As section
+    Dim footer As HeaderFooter
+    Dim para As Paragraph
+    Dim I As Long
+    Dim foundClaimDetails As Boolean
+    Dim foundSTDMatch As Boolean
+
+    Set doc = ActiveDocument
+
+    foundClaimDetails = InStr(1, doc.Range.Text, "[insert_CustomerServiceNum", vbTextCompare) > 0
+
+    If Not foundClaimDetails Then
+        For Each sec In doc.Sections
+            For Each footer In sec.Footers
+                For I = footer.Range.Paragraphs.Count To 1 Step -1
+                    Set para = footer.Range.Paragraphs(I)
+                    Dim paraText As String
+                    paraText = Trim(LCase(para.Range.Text))
+                    
+                    If paraText Like "got questions?*" _
+                        Or paraText Like "get in touch with customer service at*" Then
+                        para.Range.Delete
+                    End If
+                Next I
+
+                For Each para In footer.Range.Paragraphs
+                    Dim paraLower As String
+                    paraLower = Trim(LCase(para.Range.Text))
+                    
+                    If paraLower Like "std-idn*" Then
+                        para.Format.SpaceBefore = 12
+                        foundSTDMatch = True
+                    End If
+                Next para
+            Next footer
+        Next sec
+    End If
+End Sub
+
+Sub Den()
+    Dim doc As Document
+    Dim I As Long
+    Dim currentParaIndex As Long
+    Dim selStart As Long
+
+    Set doc = ActiveDocument
+    selStart = Selection.Range.Start
+
+    currentParaIndex = -1
+    For I = 1 To doc.Paragraphs.Count
+        If selStart >= doc.Paragraphs(I).Range.Start And selStart < doc.Paragraphs(I).Range.End Then
+            currentParaIndex = I
+            Exit For
+        End If
+    Next I
+
+    If currentParaIndex >= 3 Then
+        doc.Paragraphs(currentParaIndex).Range.Delete
+        doc.Paragraphs(currentParaIndex - 1).Range.Delete
+        doc.Paragraphs(currentParaIndex - 2).Range.Delete
+    Else
+        MsgBox "Not enough paragraphs above the cursor to delete.", vbExclamation
+    End If
+End Sub
+
+Sub MLIU()
+'
+' ML Macro
+'
+'
+    Selection.MoveRight Unit:=wdCharacter, Count:=16
+    Selection.MoveRight Unit:=wdCharacter, Count:=5, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("MLI").Insert Where:=Selection.Range, RichText:= _
+        True
+    Selection.MoveRight Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+End Sub
+
+Sub MLI()
+    Dim doc As Document
+    Dim pageCount As Long
+    Dim startPage As Long
+    Dim startRange As Range
+    Dim insertPos As Long
+    Dim deleteRange As Range
+
+    Set doc = ActiveDocument
+
+    pageCount = doc.ComputeStatistics(wdStatisticPages)
+
+    If pageCount < 4 Then
+        MsgBox "Document has fewer than 4 pages.", vbExclamation
+        Exit Sub
+    End If
+
+    startPage = pageCount - 3
+
+    Set startRange = doc.GoTo(What:=wdGoToPage, Name:=startPage)
+    insertPos = startRange.Start
+
+    Set deleteRange = doc.Range(startRange.Start, doc.Content.End)
+    deleteRange.Delete
+
+    doc.Range(insertPos, insertPos).Select
+    On Error Resume Next
+    NormalTemplate.AutoTextEntries("MLI").Insert Where:=Selection.Range, RichText:=True
+    If Err.Number <> 0 Then
+        MsgBox "Quick Part 'YourQuickPartName' not found in Normal.dotm.", vbExclamation
+        Err.Clear
+    End If
+    On Error GoTo 0
+    Selection.MoveRight Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    ' MsgBox "Last 4 pages deleted and Quick Part inserted at that location.", vbInformation
+End Sub
+
+Sub changefield()
+    Dim sec As section
+    Dim hdrFooter As HeaderFooter
+    Dim para As Paragraph
+    Dim rng As Range
+    Dim ofPos As Long
+    Dim ofRange As Range
+    Dim calcField As field
+    Dim innerField As field
+
+    For Each sec In ActiveDocument.Sections
+        For Each hdrFooter In sec.Footers
+            If hdrFooter.Exists Then
+                For Each para In hdrFooter.Range.Paragraphs
+                    Set rng = para.Range
+                    ofPos = InStr(rng.Text, " of ")
+
+                    If ofPos > 0 Then
+                        ' Corrected: skip past full " of " (4 chars) + 1 space = 5
+                        Set ofRange = rng.Duplicate
+                        ofRange.Start = rng.Start + ofPos + 5
+                        ofRange.End = rng.End
+                        On Error Resume Next
+                        ofRange.Delete
+                        On Error GoTo 0
+
+                        ' Collapse to insert after " of " and space
+                        rng.Start = rng.Start + ofPos + 5
+                        rng.End = rng.Start
+
+                        ' Insert outer field: { = ... }
+                        Set calcField = ActiveDocument.Fields.Add(Range:=rng, Type:=wdFieldEmpty, Text:="= 1 - 1", PreserveFormatting:=False)
+                        calcField.Code.Text = "= "
+
+                        ' Prepare to insert inner field at cursor after '='
+                        Dim eqRange As Range
+                        Set eqRange = calcField.Code
+                        eqRange.Collapse wdCollapseEnd
+                        eqRange.Text = " - 10"
+                        eqRange.Collapse wdCollapseStart
+
+                        ' Insert inner field: { NUMPAGES \* MERGEFORMAT }
+                        Set innerField = ActiveDocument.Fields.Add(Range:=eqRange, Type:=wdFieldEmpty, Text:="NUMPAGES \* MERGEFORMAT", PreserveFormatting:=False)
+
+                        ' Update entire footer
+                        hdrFooter.Range.Fields.Update
+                        Exit For ' only one match expected per footer
+                    End If
+                Next para
+            End If
+        Next hdrFooter
+    Next sec
+
+    ' MsgBox "? Inserted: { = { NUMPAGES \* MERGEFORMAT } - 10 } after 'of '."
+End Sub
+
+Sub UpdateAllFields()
+    Dim section As section
+    Dim header As HeaderFooter
+    Dim footer As HeaderFooter
+    Dim shp As Shape
+    
+    ' Update main document body
+    ActiveDocument.Fields.Update
+    
+    ' Update fields in all headers and footers
+    For Each section In ActiveDocument.Sections
+        For Each header In section.Headers
+            header.Range.Fields.Update
+        Next
+        For Each footer In section.Footers
+            footer.Range.Fields.Update
+        Next
+    Next
+    
+    ' Update fields inside shapes (e.g., text boxes)
+    For Each shp In ActiveDocument.Shapes
+        If shp.TextFrame.HasText Then
+            shp.TextFrame.TextRange.Fields.Update
+        End If
+    Next
+
+    ' MsgBox "All fields updated!", vbInformation
+End Sub
+
+Sub AutoFitToWindow_TablesWithTotal()
+    Dim tbl As Table
+    Dim rng As Range
+    Dim tableText As String
+
+    For Each tbl In ActiveDocument.Tables
+        Set rng = tbl.Range
+        tableText = UCase(Replace(rng.Text, Chr(13), ""))
+        tableText = Replace(tableText, Chr(7), "") ' clean cell markers
+
+        ' Check if "TOTAL" exists but not "SUB TOTAL"
+        If InStr(tableText, "TOTAL") > 0 And InStr(tableText, "SUB TOTAL") = 0 Then
+            tbl.AutoFitBehavior (wdAutoFitWindow)
+        End If
+    Next tbl
+
+    MsgBox "Tables with 'TOTAL' (excluding 'SUB TOTAL') were autofitted to window.", vbInformation
+End Sub
+
+Sub Table()
+    Dim doc As Document
+    Dim docText As String
+
+    Set doc = ActiveDocument
+    docText = doc.Content.Text
+
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "Plan balances"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+
+    If Selection.Find.Execute Then
+        Selection.MoveLeft Unit:=wdWord, Count:=1
+        Selection.MoveUp Unit:=wdLine, Count:=1
+        Selection.TypeParagraph
+        Selection.TypeParagraph
+        Selection.MoveUp Unit:=wdLine, Count:=1
+
+        ' Check for text and insert appropriate Quick Part
+        If InStr(docText, "MyUHCMedicare.com") > 0 Then
+            Application.Templates( _
+                "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("TableMed").Insert Where:=Selection.Range, _
+            RichText:=True
+        ElseIf InStr(docText, "MyUHCAdvantage.com") > 0 Then
+            Application.Templates( _
+                "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("TableAdv").Insert Where:=Selection.Range, _
+            RichText:=True
+        End If
+
+        Selection.Delete Unit:=wdCharacter, Count:=1
+        Selection.MoveUp Unit:=wdLine, Count:=4
+        Selection.Delete Unit:=wdCharacter, Count:=1
+    Else
+        MsgBox """Plan balances"" not found in the document.", vbInformation
+    End If
+End Sub
+
+Sub LOCA()
+    Dim doc As Document
+    Dim insertRange As Range
+    Dim keywordMedicare As String
+    Dim keywordAdvantage As String
+
+    Set doc = ActiveDocument
+    keywordMedicare = "MyUHCMedicare.com"
+    keywordAdvantage = "MyUHCAdvantage.com"
+
+    ' Find "THIS IS NOT A BILL"
+    With doc.Content.Find
+        .ClearFormatting
+        .Text = "Located in the totals"
+        .Forward = True
+        .Wrap = wdFindStop
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+
+        If .Execute Then
+            ' Move selection to start of found text
+            Set insertRange = doc.Range(Start:=Selection.Start, End:=Selection.Start)
+
+            ' Decide which content to insert
+            If InStr(doc.Content.Text, keywordMedicare) > 0 Then
+                Selection.MoveDown Unit:=wdLine, Count:=3, Extend:=wdExtend
+                Selection.MoveRight Unit:=wdCharacter, Count:=13, Extend:=wdExtend
+                Application.Templates( _
+                    "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+                    ).BuildingBlockEntries("LocMed").Insert Where:=Selection.Range, RichText _
+                    :=True
+
+            ElseIf InStr(doc.Content.Text, keywordAdvantage) > 0 Then
+                Selection.MoveDown Unit:=wdLine, Count:=3, Extend:=wdExtend
+                Selection.MoveRight Unit:=wdCharacter, Count:=13, Extend:=wdExtend
+                Application.Templates( _
+                    "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+                    ).BuildingBlockEntries("LocAdv").Insert Where:=Selection.Range, RichText _
+                    :=True
+
+            Else
+                MsgBox "Neither UHC Medicare nor UHC Advantage keyword found.", vbExclamation
+            End If
+        Else
+            MsgBox """THIS IS NOT A BILL"" not found in the document.", vbInformation
+        End If
+    End With
+End Sub
+
+Sub ProcessAllFilesInFolder()
+    Dim filePath As String
+    Dim fileName As String
+    Dim doc As Document
+    Dim folderPath As String
+ 
+    ' Set the folder path
+    folderPath = "C:\Users\SiddharthSrivastava\Downloads\B17986-STD-ENG-ENG-LP-168\New folder (2)"
+    ' Ensure folder path has a trailing slash
+    If Right(folderPath, 1) <> "\" Then folderPath = folderPath & "\"
+    ' Get the first file in the folder
+    fileName = Dir(folderPath & "*.docx")
+ 
+    If fileName = "" Then
+        MsgBox "No .docx files found in the specified folder.", vbExclamation
+        Exit Sub
+    End If
+ 
+    Application.ScreenUpdating = False
+ 
+    ' Loop through all files in the folder
+    Do While fileName <> ""
+        ' Open the document
+        Set doc = Documents.Open(folderPath & fileName)
+ 
+       Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = _
+            "To the right is the total amount you may owe for the services"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    Selection.HomeKey Unit:=wdLine
+    Selection.MoveDown Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("Located").Insert Where:= _
+        Selection.Range, RichText:=True
+End If
+ 
+Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "Plan balances"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    Selection.MoveLeft Unit:=wdWord, Count:=1
+    Selection.MoveUp Unit:=wdLine, Count:=1
+    Selection.TypeParagraph
+    Selection.TypeParagraph
+    Selection.MoveUp Unit:=wdLine, Count:=1
+    Application.Templates( _
+        "C:\Users\SiddharthSrivastava\AppData\Roaming\Microsoft\Templates\Normal.dotm" _
+        ).BuildingBlockEntries("Table").Insert Where:=Selection.Range, _
+        RichText:=True
+    Selection.Delete Unit:=wdCharacter, Count:=1
+    Selection.MoveUp Unit:=wdLine, Count:=4
+    Selection.Delete Unit:=wdCharacter, Count:=1
+End If
+ 
+Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = _
+            "For appeals related to payment of a medical service/item you already received, we’ll give you a written decision within 30 days."
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    Selection.MoveRight Unit:=wdWord, Count:=1
+    Selection.MoveLeft Unit:=wdCharacter, Count:=8
+    Selection.TypeBackspace
+    Selection.TypeText Text:="6"
+End If
+ 
+ 
+' Save and close the document
+        doc.Save
+        doc.Close
+ 
+        ' Get the next file name
+        fileName = Dir
+    Loop
+ 
+    Application.ScreenUpdating = True
+End Sub
+

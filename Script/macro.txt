@@ -1,0 +1,29 @@
+Sub DeleteTableAndKeytermsAndParagraphs()
+    Dim tbl As Table
+    Dim rng As Range
+
+    Set rng = Selection.Range
+    
+    Do While rng.Start > 0
+        ' Check if the current range is in a table
+        If rng.Tables.Count > 0 Then
+            ' If a table is found, delete it
+            rng.Tables(1).Delete
+            Exit Do
+        End If
+        
+        rng.MoveStart wdParagraph, -1
+    Loop
+    
+    With Selection.Find
+        .ClearFormatting
+        .Text = "[insert_keyterms]^p"
+        .Replacement.ClearFormatting
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Execute Replace:=wdReplaceAll
+    End With
+    
+    
+End Sub

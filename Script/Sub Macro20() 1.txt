@@ -1,0 +1,281 @@
+Sub Macro20()
+'
+' Macro20 Macro
+'
+'
+Dim filePath As String
+    Dim fileName As String
+    Dim doc As Document
+    Dim folderPath As String
+
+    ' Set the folder path
+    folderPath = "C:\Users\RakeshKumarSingh\OneDrive - BIG Language Solutions\Desktop\Rakesh Kumar Singh\Auto folder"
+    ' Ensure folder path has a trailing slash
+    If Right(folderPath, 1) <> "\" Then folderPath = folderPath & "\"
+    ' Get the first file in the folder
+    fileName = Dir(folderPath & "*.docx")
+
+    If fileName = "" Then
+        MsgBox "No .docx files found in the specified folder.", vbExclamation
+        Exit Sub
+    End If
+
+    Application.ScreenUpdating = False
+
+    ' Loop through all files in the folder
+    Do While fileName <> ""
+        ' Open the document
+        Set doc = Documents.Open(folderPath & fileName)
+
+        ' Perform the find and replace operations
+        Selection.Find.ClearFormatting
+        Selection.Find.Replacement.ClearFormatting
+
+        With Selection.Find
+            .Text = "See claim details on following pages or go directly to MyUHCMedicare.com"
+            .Replacement.Text = ""
+            .Forward = True
+            .Wrap = wdFindContinue
+            .Format = False
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .MatchSoundsLike = False
+            .MatchAllWordForms = False
+        End With
+
+        If Selection.Find.Execute Then
+            Selection.MoveRight Unit:=wdCell
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\RakeshKumarSingh\OneDrive - BIG Language Solutions\Desktop\Guidelines_Updates\QR Macro Image\United Medicare.jpg", _
+                LinkToFile:=False, SaveWithDocument:=True
+        End If
+
+        Selection.Find.ClearFormatting
+        Selection.Find.Replacement.ClearFormatting
+
+        With Selection.Find
+            .Text = "See claim details on following pages or go directly to MyUHCAdvantage.com"
+            .Replacement.Text = ""
+            .Forward = True
+            .Wrap = wdFindContinue
+            .Format = False
+            .MatchCase = False
+            .MatchWholeWord = False
+            .MatchWildcards = False
+            .MatchSoundsLike = False
+            .MatchAllWordForms = False
+        End With
+
+        If Selection.Find.Execute Then
+            Selection.MoveRight Unit:=wdCell
+            Selection.Delete Unit:=wdCharacter, Count:=1
+            Selection.InlineShapes.AddPicture fileName:= _
+                "C:\Users\RakeshKumarSingh\OneDrive - BIG Language Solutions\Desktop\Guidelines_Updates\QR Macro Image\United Advantage.jpg", _
+                LinkToFile:=False, SaveWithDocument:=True
+        End If
+        
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "[insert_DenialCodeDescription]"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    Selection.HomeKey Unit:=wdLine
+    Selection.MoveUp Unit:=wdParagraph, Count:=2
+    Selection.EndKey Unit:=wdLine, Extend:=wdExtend
+    Selection.MoveDown Unit:=wdParagraph, Count:=2, Extend:=wdExtend
+    Selection.Delete Unit:=wdCharacter, Count:=1
+End If
+        
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "SALT LAKE CITY, UT 84131-0362"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    With Selection.Find
+        .Text = "You Have The Right To Appeal Our Decision"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    ChangeFileOpenDirectory _
+        "C:\Users\RakeshKumarSingh\OneDrive - BIG Language Solutions\Desktop\Guidelines_Updates\QR Macro Image\Auto Macro\"
+    Selection.InsertFile fileName:= _
+        "https://ctslanguagelink-my.sharepoint.com/personal/rakesh_kumarsingh_biglanguage_com/Documents/Desktop/Guidelines_Updates/QR%20Macro%20Image/Auto%20Macro/United%20Healthcare.docx" _
+        , Range:="", ConfirmConversions:=False, Link:=False, Attachment:=False
+    Selection.TypeBackspace
+    
+    End If
+    
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "Salt Lake City, UT 84130-0995"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    With Selection.Find
+        .Text = "You Have The Right To Appeal Our Decision"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    ChangeFileOpenDirectory _
+        "C:\Users\RakeshKumarSingh\OneDrive - BIG Language Solutions\Desktop\Guidelines_Updates\QR Macro Image\Auto Macro\"
+    Selection.InsertFile fileName:= _
+        "https://ctslanguagelink-my.sharepoint.com/personal/rakesh_kumarsingh_biglanguage_com/Documents/Desktop/Guidelines_Updates/QR%20Macro%20Image/Auto%20Macro/United%20Healthcare_0356.docx" _
+        , Range:="", ConfirmConversions:=False, Link:=False, Attachment:=False
+    Selection.TypeBackspace
+    
+    End If
+    
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "PEOPLES HEALTH"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    With Selection.Find
+        .Text = "You Have The Right To Appeal Our Decision"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    ChangeFileOpenDirectory _
+        "C:\Users\RakeshKumarSingh\OneDrive - BIG Language Solutions\Desktop\Guidelines_Updates\QR Macro Image\Auto Macro\"
+    Selection.InsertFile fileName:= _
+        "https://ctslanguagelink-my.sharepoint.com/personal/rakesh_kumarsingh_biglanguage_com/Documents/Desktop/Guidelines_Updates/QR%20Macro%20Image/Auto%20Macro/People%20Health.docx" _
+        , Range:="", ConfirmConversions:=False, Link:=False, Attachment:=False
+    Selection.TypeBackspace
+    End If
+            
+    Selection.Find.ClearFormatting
+    Selection.Find.Replacement.ClearFormatting
+    With Selection.Find
+        .Text = "PREFERRED CARE PARTNERS INC"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+If Selection.Find.Execute Then
+    Selection.Find.Execute
+    With Selection.Find
+        .Text = "You Have The Right To Appeal Our Decision"
+        .Replacement.Text = ""
+        .Forward = True
+        .Wrap = wdFindContinue
+        .Format = False
+        .MatchCase = False
+        .MatchWholeWord = False
+        .MatchWildcards = False
+        .MatchSoundsLike = False
+        .MatchAllWordForms = False
+    End With
+    Selection.Find.Execute
+    Selection.HomeKey Unit:=wdLine
+    Selection.EndKey Unit:=wdStory, Extend:=wdExtend
+    Selection.MoveUp Unit:=wdParagraph, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdWord, Count:=1, Extend:=wdExtend
+    Selection.MoveLeft Unit:=wdCharacter, Count:=1, Extend:=wdExtend
+    ChangeFileOpenDirectory _
+        "C:\Users\RakeshKumarSingh\OneDrive - BIG Language Solutions\Desktop\Guidelines_Updates\QR Macro Image\Auto Macro\"
+    Selection.InsertFile fileName:= _
+        "https://ctslanguagelink-my.sharepoint.com/personal/rakesh_kumarsingh_biglanguage_com/Documents/Desktop/Guidelines_Updates/QR%20Macro%20Image/Auto%20Macro/Prefered%20Care%20Partners.docx" _
+        , Range:="", ConfirmConversions:=False, Link:=False, Attachment:=False
+    Selection.TypeBackspace
+    End If
+    
+    ' Save and close the document
+        doc.Save
+        doc.Close
+
+        ' Get the next file name
+        fileName = Dir
+    Loop
+
+    Application.ScreenUpdating = True
+End Sub
